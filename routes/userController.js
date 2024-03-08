@@ -17,7 +17,7 @@ router.post('/register', async (req, res) => {
             confirmPassword 
           } = req.body;
 
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: 'Username already exists' });
     }
@@ -62,8 +62,8 @@ router.post('/login', async (req, res) => {
 
     const accessToken = generateAccessToken(user);
     
-    res.json({ message: 'Login successful', accessToken,user:user });
-    console.log({ message: 'Login successful', accessToken,user:user });
+    return res.status(200).json({message: 'Login successful',result:true,  accessToken,user:user });
+    //console.log({ message: 'Login successful', accessToken,user:user });
   } catch (err) {
     console.error(err);
 
